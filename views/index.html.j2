@@ -10,8 +10,12 @@
         <ol>
             {% for player in players %}
                 <li class="d-flex justify-content-between align-items-center">
-                    {{ loop.index }}.
-                    {{ player.username }}
+                    <div>
+                        {{ loop.index }}.
+                        <a href="{{ url_for('matches_player', player_id=player.id) }}">
+                            {{ player.username }}
+                        </a>
+                    </div>
                     <span>{{ player.rating|int }}</span>
                 </li>
             {% endfor %}

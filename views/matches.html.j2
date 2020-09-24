@@ -1,4 +1,5 @@
 {% extends "layouts/application.html.j2" %}
+{% import "macros/pagination.html.j2" as pagination %}
 
 {% block name %} Home {% endblock %}
 
@@ -12,12 +13,20 @@
                 <li class="d-flex justify-content-between align-items-center">
                     {{ match.date|datetimefmt }}
                     <span>
-                    {{ match.white.username }}({{ match.rating_white|int }}) - {{ match.black.username }}({{ match.rating_black|int }})
+                    <a href="{{ url_for('matches_player', player_id=match.white.id) }}">
+                        {{ match.white.username }}({{ match.rating_white|int }})
+                    </a>
+                    -
+                    <a href="{{ url_for('matches_player', player_id=match.black.id) }}">
+                    {{ match.black.username }}({{ match.rating_black|int }})
+                    </a>
                     </span>
                     <span>{{ match.result.to_score() }}</span>
                 </li>
             {% endfor %}
         </ol>
+
+        {{ pagination.render(endpoint, pages, args) }}
     </div>
 </div>
 {% endblock %}

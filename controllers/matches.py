@@ -7,14 +7,27 @@ from util import html
 from models import Person, Match
 
 
+def _render_matches(matches, endpoint, args={}):
+    page = int(request.values.get('page', 1))
+    pagination = matches.paginate(page, per_page=25)
+    data = {
+        'matches': pagination.items,
+        'pages': pagination,
+        'endpoint': endpoint,
+        'args': args
+    }
+    return html.ok('matches', data)
+
+
 @app.route('/matches/', methods=['GET', 'POST'])
 def matches():
-    return html.ok('matches', {'matches': Match.query.order_by(Match.date.desc()).limit(15)})
+    return _render_matches(Match.query.order_by(Match.date.desc()), 'matches')
+
 
 @app.route('/matches/<player_id>', methods=['GET', 'POST'])
 def matches_player(player_id):
     player = Person.query.get(int(player_id))
-    return html.ok('matches', {'matches': player.matches.order_by(Match.date.desc())})
+    return _render_matches(player.matches.order_by(Match.date.desc()), 'matches_player', args={'player_id': player_id})
 
 
 @app.route('/matches/add', methods=['GET', 'POST'])
