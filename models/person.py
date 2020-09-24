@@ -10,6 +10,8 @@ class Person(db.Model):
 
     _password = db.Column(db.Text)
     _roles = db.Column(db.Text, default='')
+    first_name = db.Column(db.Text)
+    last_name = db.Column(db.Text)
     email = db.Column(db.Text)
     username = db.Column(db.Text)
     rating = db.Column(db.Float, default=1200)

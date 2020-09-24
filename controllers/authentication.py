@@ -31,13 +31,15 @@ def register():
     email = request.values.get('email', '')
     username = request.values.get('username', '')
     password = request.values.get('password', '')
+    first_name = request.values.get('first_name', '')
+    last_name = request.values.get('last_name', '')
 
     user = Person.query.filter(or_(Person.username == username, Person.email == email)).first()
 
     if user:
         return html.ok('register', {'error': 'Gebruiker bestaat al!'})
 
-    person = Person(username=username, email=email)
+    person = Person(username=username, email=email, first_name=first_name, last_name=last_name)
     person.set_password(password)
     db.session.add(person)
     db.session.commit()

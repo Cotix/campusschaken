@@ -12,7 +12,7 @@
                     <label for="opponent">Tegenstander</label>
                     <select class="selectpicker form-control" data-live-search="true" name="opponent" id="opponent">
                         {% for player in players %}
-                        <option value="{{ player.id }}">{{ player.username }}</option>
+                        <option data-tokens="{{ player.first_name }} {{ player.last_name }}" value="{{ player.id }}">{{ player.username }}</option>
                         {% endfor %}
                     </select>
                 </div>

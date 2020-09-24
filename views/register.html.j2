@@ -2,6 +2,11 @@
 
 
 {% block content %}
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
     <div class="row my-2">
         <div class="card col-md-8 col-sm offset-md-2">
             <div class="card-body">
@@ -11,7 +16,17 @@
                         <div class="form-group">
                             <label for="username">Gebruikersnaam</label>
                             <input class="form-control" id="username"
-                                   name="username" placeholder="username">
+                                   name="username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <label for="first_name">Voornaam</label>
+                            <input class="form-control" id="first_name"
+                                   name="first_name" placeholder="Voornaam">
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Achternaam</label>
+                            <input class="form-control" id="last_name"
+                                   name="last_name" placeholder="Achternaam">
                         </div>
                         <div class="form-group">
                             <label for="email">Emailadres</label>
