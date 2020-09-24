@@ -1,0 +1,23 @@
+{% extends "layouts/application.html.j2" %}
+
+{% block name %} Home {% endblock %}
+
+{% block content %}
+<h1 class="mt-5 text-center">Matches</h1>
+
+<div class="row my-2">
+    <div class="card text-center col-md-8 col-sm offset-md-2">
+        <ol>
+            {% for match in matches %}
+                <li class="d-flex justify-content-between align-items-center">
+                    {{ match.date|datetimefmt }}
+                    <span>
+                    {{ match.white.username }}({{ match.rating_white|int }}) - {{ match.black.username }}({{ match.rating_black|int }})
+                    </span>
+                    <span>{{ match.result.to_score() }}</span>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+{% endblock %}
